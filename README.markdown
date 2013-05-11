@@ -5,22 +5,28 @@ Channel Data
 
 #### By Justin Kimbrell / Objective HTML
 
-Overview
+<a id="overview"></a>Overview
 --------
 
 Channel Data is designed to give you access to a concise and memorable syntax. The current API's to retrieve channel data seem cumbersome and often require many lines of code just to get your entry data along with the custom fields. Native API's also have parameters that aren't consistent, resulting in code that is repeatedly looked up for what should be basic tasks. Simply put, Channel Data just works and speeds add-on development up tremendously. 
 
 Channel Data also provided a simple and effective interface for developers to interact with other add-ons using a standards based approach. By using the Channel Data API to create an API for your add-on, you can easily allow other developers to programmatically interact with your add-ons in ways that weren't possible before.
 
-Table of Contents
+<a id="toc"></a>Table of Contents
 -----------------
 
-  1. [Basic Usage]( #basicusage "Go to Basic Usage")
-  2. [Polymorphic Parameters]( #polymorphicparameters "Go to 'Polymorphic Parameters' section")
-  3. [Channel Data Library]( #channeldatalibrary "Go to the 'Channel Data Library' section")
-  4. [What's to come?](#whatstocome "Go to the 'What's to come' section")
-  5. [Contributors](#contributors "Go to the 'Contributors' section")
-  6. [Disclaimer](#disclaimer "Go to the Disclaimer section")
+  1. [Installation]( #installation "Go to Installation")
+  2. [Basic Usage]( #basic-usage "Go to Basic Usage")
+  3. [Polymorphic Parameters]( #polymorphic-parameters "Go to 'Polymorphic Parameters' section")
+  4. [Channel Data Library]( #channel-data-library "Go to the 'Channel Data Library' section")
+  5. [What's to come?](#whats-to-come "Go to the 'What's to come' section")
+  6. [Contributors](#contributors "Go to the 'Contributors' section")
+  7. [Disclaimer](#disclaimer "Go to the Disclaimer section")
+
+Installation
+------------
+
+To install simply place the `Channel_data` directory in your `system/libraries` directory or your add-on's `libraries` directory.
 
 Basic Usage
 -----------
@@ -66,7 +72,7 @@ The add-on API framework allows you load third-party add-on API's. It can also h
 
 _By extending the Base_API class, you inherent the Channel Data object. Now, find cool way to extend add-ons in a easier and much more powerful way._
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
 
 Polymorphic Parameters
 ----------------------
@@ -145,14 +151,14 @@ _Or... You can use the alternative syntax. This array is referred to an active r
 
 _The returned object would look something like this, also known as an active record object…_
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
 
-Channel Data Library	
+Channel Data Library
 --------------------
 
 I am currently working to fully documenting the source code and properly generate a dynamic documentation form the comments within the code. Until then, refer to __Channel_data_lib.php__ source code file to reference methods. I realize this is pretty terrible, but this stuff comes in phases, and this is a free library built in conjunction with the projects I build for paying clients… I will get the new docs created as soon as I learn the overly complicated systems that exist to create real documentation without re-typing everything 3 times.
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
 
 
 What's to come?
@@ -160,7 +166,7 @@ What's to come?
 
 As the project start to mature, the main goal is get to people to start adopting this library and using to it to create rich third-party API's for their add-ons. API's are awesome and allow us all to make better products. If we can all make an effort to create add-ons with API's I bet we start to see even more cool things built.
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
 
 
 Contributors
@@ -170,7 +176,7 @@ Using feedback from others is a critical part of success. Become a contributor b
 
  -  [@wesrice](#https://www.twitter.com/wesrice "Go to @wesrice's Twitter page") - Thanks for the inspiration and ideas to include an add-on API
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
 
 
 Disclaimer
@@ -182,4 +188,4 @@ License
 -------
 Channel Data is licensed using the BSD 2-Clause License. In a nutshell, do whatever you want with it so long as you leave the copyright information and don't take credit for my work. The idea is for everyone to benefit from the library. For a full copy of the license, refer to license.txt in the download package.
 
-[Back to Top](#channeldata "Go to the top of the page")
+[Back to Top](#channel-data "Go to the top of the page")
