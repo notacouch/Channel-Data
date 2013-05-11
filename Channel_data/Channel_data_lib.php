@@ -729,21 +729,63 @@ if(!class_exists('Channel_data_lib'))
 		 * @return	object
 		 */
 
-		public function get_channel_fields($channel_id = false, $select = array('*'), $where = array(), $order_by = 'field_id', $sort = 'DESC', $limit = FALSE, $offset = 0)
+		public function get_channel_fields($channel_id = FALSE, $select = array('*'), $where = array(), $order_by = 'field_id', $sort = 'DESC', $limit = FALSE, $offset = 0)
 		{
+			// Check if the Field Group ID was provided
+			$group_id = FALSE;
+			
+			// Use existing method
+			if (isset($select['where']) 
+			  && (isset($select['where']['group_id']) OR isset($select['where']['channel_fields.group_id']))
+			)
+			{
+		    if ( isset($select['where']['channel_fields.group_id']) )
+		    {
+  		    $select['where']['group_id'] = $select['where']['channel_fields.group_id'];
+  		    unset($select['where']['channel_fields.group_id']);
+		    }
+		    return $this->get_fields_by_group($select['where']['group_id'], $select, $where, $order_by, $sort, $limit, $offset);
+			}
+			// Carry on
+			else if ( ! empty($where) 
+			  && (isset($where['group_id']) OR isset($where['channel_fields.group_id']))
+			)
+			{
+		    $group_id = isset($where['group_id']) ? $where['group_id'] : $where['channel_fields.group_id'];  				
+			}
+
 			if($channel_id !== FALSE)
 			{
-				$channel = $this->get_channel($channel_id)->row();
-
-				if(isset($channel->field_group))
+				// If the Field Group ID was not provided, join the Channel/Fields tables on the Field Group (single query)
+				if ($group_id === FALSE)
 				{
-					$group_id = array('group_id' => $channel->field_group);
-					$where = array_merge($where, $group_id);
+  			  // We need to go polymorphic to add a join
+  				if ( ! $this->is_polymorphic($select))
+  				{
+  			     $select = array(
+  			       'select' => ($select === array('*')) ? array('channel_fields.*') : $select[0],
+  			     );
+  				}
+  								
+  				$select['inner join'] = array(
+  			    'channels' => 'channels.field_group = channel_fields.group_id',
+  			  );
+  			  
+  			  // Select Channel (where argument)
+  				$where_channel = array(
+  				  'channels.channel_id' => $channel_id,
+  			  );
+  				$where = array_merge($where, $where_channel);
+  
+  				// Select Channel (polymorphic)
+  				if (isset($select['where']))
+  				{
+  				  $select['where'] = array_merge($select['where'], $where);
+  				}
 				}
 			}
 
 			return $this->get('channel_fields', $select, $where, $order_by, $sort, $limit, $offset);
-
 		}
 
 		/**
