@@ -1344,7 +1344,7 @@ if(!class_exists('Channel_data_lib'))
 		 * @return	object
 		 */
 
-		public function get_member_data($select = array(), $where = array(), $order_by = 'rel_id', $sort = 'DESC', $limit = FALSE, $offset = 0)
+		public function get_member_data($select = array(), $where = array(), $order_by = 'member_id', $sort = 'DESC', $limit = FALSE, $offset = 0)
 		{
 			return $this->get('member_data', $select, $where, $order_by, $sort, $limit, $offset);
 		}
