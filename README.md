@@ -40,7 +40,7 @@ ExpressionEngine 2.4+
 
 ## Getting Started
 
-To get started using Channel Data, you need to copy `channel_data` into your `system/expressionengine/third_party` directory. Channel Data is packages as its own *module* so you an reuse the same libary with all of your add-ons. This is also convenient when you upgrade ExpressionEngine since you don't have to worry about override files stored in the system directories.
+To get started using Channel Data, you need to copy `channel_data` into your `system/expressionengine/third_party` directory. Channel Data is packaged as its own *module* so you an reuse the same libary with all of your add-ons. This is also convenient when you upgrade ExpressionEngine since you don't have to worry about override files stored in the system directories.
 
 Channel Data includes some core modules for you to use. Core models belong to the `ChannelData\Model` namespace, and can be reused within your application. You can create your own models using the following structure:
 
@@ -60,7 +60,7 @@ The key thing to note when instantiating Channel Data is that you need to do 3 t
 	ee()->load->add_package_path(PATH_THIRD . 'your_addon_name');
 
 	// Load the driver and directories at once
-	ee()->load->driver('ChannelData', array(
+	ee()->load->driver('Channeldata', array(
 		'directories' => array(
 			PATH_THIRD . 'your_addon_name/models'
 		)
@@ -588,7 +588,7 @@ Sets an array of attributes. Ignores the security filters.
 
 Sets an single attribute. Ignores the security filters.
 
-	$member->setAttributes('company', 'Objective HTML');
+	$member->setAttribute('company', 'Objective HTML');
 
 ### fill($data = array())
 

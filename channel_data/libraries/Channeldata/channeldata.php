@@ -1,56 +1,60 @@
 <?php 
 
-function __autoLoad($className)
+if ( ! function_exists('channeldata_autoload'))
 {
-	$className   = ltrim($className, '\\');
-	$extension   = '.php';
-	$directories = array(
-		APPPATH . 'models',
-		'base',
-		'components',
-		'models',
-		'responses',
-		'../../models',
-		'../../models/channels'
-	);
-
-	if(!class_exists($className))
-	{
-		foreach($directories as $directory)
-		{
-			$fileName  = '';
-			$namespace = '';
-
-			if ($lastNsPos = strrpos($className, '\\')) {
-			    $namespace = substr($className, 0, $lastNsPos);
-			    $className = substr($className, $lastNsPos + 1);
-			    $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-			}
-
-			$fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-			$filePath  = __DIR__ . '/' . $directory . '/' . $fileName;
-			
-			if(file_exists($filePath))
-			{
-				require_once($filePath);
-			}
-		}
-
-
-		if(isset(ee()->channeldata))
-		{
-			foreach(ee()->channeldata->directories() as $directory)
-			{
-				$filePath  = $directory . '/' . $fileName;
-
-				if(file_exists($filePath))
-				{
-					require_once($filePath);
-				}
-			}
-		}
-	}
-
+  function channeldata_autoload($className)
+  {
+  	$className   = ltrim($className, '\\');
+  	$extension   = '.php';
+  	$directories = array(
+  		APPPATH . 'models',
+  		'base',
+  		'components',
+  		'models',
+  		'responses',
+  		'../../models',
+  		'../../models/channels'
+  	);
+  
+  	if(!class_exists($className))
+  	{
+  		foreach($directories as $directory)
+  		{
+  			$fileName  = '';
+  			$namespace = '';
+  
+  			if ($lastNsPos = strrpos($className, '\\')) {
+  			    $namespace = substr($className, 0, $lastNsPos);
+  			    $className = substr($className, $lastNsPos + 1);
+  			    $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+  			}
+  
+  			$fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+  			$filePath  = __DIR__ . '/' . $directory . '/' . $fileName;
+  			
+  			if(file_exists($filePath))
+  			{
+  				require_once($filePath);
+  			}
+  		}
+  
+  
+  		if(isset(ee()->channeldata))
+  		{
+  			foreach(ee()->channeldata->directories() as $directory)
+  			{
+  				$filePath  = $directory . '/' . $fileName;
+  
+  				if(file_exists($filePath))
+  				{
+  					require_once($filePath);
+  				}
+  			}
+  		}
+  	}
+  
+  }
+  spl_autoload_register('channeldata_autoload');
 }
 
 if(!function_exists('is_closure'))
@@ -92,7 +96,7 @@ class ChannelData {
 			$file = array($file);
 		}
 		
-		$this->directories[] = $file;
+		$this->directories = array_merge($this->directories(), $file);
 	}
 
 	public function directories()
